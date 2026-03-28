@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>改版前原型 - AI全能写作</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=PingFang+SC:wght@400;500;600&display=swap');
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
+            background-color: #E2E8F0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* 按钮内发光效果 */
+        .btn-inner-shadow {
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        /* 文本框微调 */
+        .custom-textarea:focus {
+            border-color: #5952FF;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 手机外壳容器 -->
+    <div class="w-full max-w-[390px] h-[844px] bg-[#F7F8FA] relative overflow-hidden shadow-2xl sm:rounded-[45px] sm:border-[10px] sm:border-gray-900 flex flex-col">
+        
+        <!-- 顶部状态栏 -->
+        <div class="w-full h-12 flex justify-between items-center px-6 text-black pt-2 shrink-0 bg-[#F7F8FA]">
+            <span class="text-[15px] font-semibold tracking-tight">9:36</span>
+            <div class="flex space-x-1.5 items-center">
+                <i class="fas fa-signal text-[12px]"></i>
+                <i class="fas fa-wifi text-[12px]"></i>
+                <i class="fas fa-battery-full text-[16px]"></i>
+            </div>
+        </div>
+
+        <!-- 导航栏 -->
+        <header class="flex items-center justify-between px-4 py-3 shrink-0 bg-[#F7F8FA] border-b border-gray-100/50">
+            <button class="w-8 h-8 flex items-center justify-left text-gray-700">
+                <i class="fas fa-arrow-left text-lg font-light"></i>
+            </button>
+            <div class="flex items-center text-[18px] font-medium text-gray-900">
+                AI全能写作 <i class="fas fa-caret-down ml-1 text-xs text-gray-400"></i>
+            </div>
+            <div class="flex gap-4 text-gray-600">
+                <button><i class="far fa-comment-dots text-[20px]"></i></button>
+                <button><i class="far fa-clock text-[20px]"></i></button>
+            </div>
+        </header>
+
+        <!-- 主体内容区 -->
+        <main class="flex-1 overflow-y-auto hide-scrollbar px-4 pt-5 pb-44 flex flex-col">
+            
+            <!-- 主体输入表单 -->
+            <div class="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm mb-4">
+                <div class="mb-5">
+                    <label class="block text-[15px] font-semibold text-gray-800 mb-2.5">文章主题</label>
+                    <input type="text" 
+                           class="w-full bg-[#F8F9FF] border border-gray-100 rounded-xl px-4 py-3 text-[14px] outline-none transition-all focus:border-indigo-200"
+                           placeholder="请输入您要创作的文章主题" 
+                           value="推广保温杯">
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-center mb-2.5">
+                        <label class="block text-[15px] font-semibold text-gray-800">详细写作需求</label>
+                        <span class="text-gray-300 text-[11px] font-medium uppercase tracking-tighter">1000 字上限</span>
+                    </div>
+                    <!-- 这里是改版前的最大痛点：没有结构化模块，只能纯靠文字说明 -->
+                    <textarea 
+                        class="custom-textarea w-full h-72 bg-[#F8F9FF] border border-gray-100 rounded-xl p-4 text-[14px] leading-relaxed outline-none transition-all resize-none text-gray-700"
+                        placeholder="描述详细有助于为您生成最合适的内容。您可以尝试在此说明：期望的文章字数、语气风格、发布渠道以及特定的产品卖点..."
+                    >要求突出保温杯保温的时间长达24小时，性价比高。字数控制在350字左右，语气默认就好，风格小红书风，使用中文生成。</textarea>
+                </div>
+            </div>
+
+            <!-- 进阶引导部分：柔和的文字提示 -->
+            <div class="px-2 py-1">
+                <div class="flex items-start gap-2.5 opacity-80">
+                    <div class="mt-0.5">
+                        <i class="fas fa-lightbulb text-indigo-400 text-[12px]"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-[12px] text-gray-500 leading-relaxed">
+                            <span class="font-medium text-gray-600">描述详细有助于为您生成合适内容</span>。您可以尝试说明您的文章字数、语气、风格或目标受众，例如：<span class="italic text-gray-400">“请写一段200字、幽默、适合朋友圈的...”</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- 底部操作区 -->
+        <div class="absolute bottom-0 left-0 w-full px-6 pb-10 pt-6 bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-[0_-8px_25px_rgba(0,0,0,0.02)]">
+            
+            <div class="relative w-full">
+                <!-- 立即创作按钮 -->
+                <button class="btn-inner-shadow w-full bg-gradient-to-r from-[#5952FF] via-[#4D45FF] to-[#3B33FF] active:scale-[0.97] transition-all text-white font-semibold text-[17px] h-[58px] rounded-2xl shadow-[0_12px_24px_rgba(89,82,255,0.22)] flex justify-center items-center gap-2">
+                    <span>立即创作</span>
+                    <i class="fas fa-paper-plane text-[13px] opacity-80"></i>
+                </button>
+                
+                <!-- 次数角标 -->
+                <div class="absolute -top-3 right-0 bg-[#FF5C5C] text-white text-[10px] font-bold px-2.5 py-0.5 shadow-md flex items-center gap-1" 
+                     style="border-radius: 10px 10px 10px 0; border: 1.5px solid white;">
+                    <i class="fas fa-bolt text-[8px]"></i>
+                    <span>今日剩余 3 次</span>
+                </div>
+            </div>
+
+            <!-- 底部辅助说明 -->
+            <div class="mt-4 flex justify-center items-center gap-2">
+                <div class="w-3.5 h-3.5 rounded-sm border border-gray-200 flex items-center justify-center bg-gray-50">
+                    <i class="fas fa-check text-[7px] text-indigo-500"></i>
+                </div>
+                <span class="text-[11px] text-gray-400">阅读并同意《服务协议》与《隐私政策》</span>
+            </div>
+            
+            <!-- iOS Indicator -->
+            <div class="w-28 h-1.5 bg-gray-100 rounded-full mx-auto mt-6"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>
